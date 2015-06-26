@@ -1,0 +1,1 @@
+Nu prea am eu experienta in programare... Am stat cam 24h in continuu ca sa fac aplicatia asta... Daca vad un cod, inteleg ce este scris, dar de scris....mai greu. Nimeni nu mi a răspuns la întrebarea: cum sa îmi dezvolt gândirea de programator? 
