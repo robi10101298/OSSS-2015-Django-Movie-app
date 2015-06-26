@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django Movie app</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .jumbotron{
+        background: #6f5499;
+        background-image: -webkit-gradient(linear,left top,left bottom,from(#563d7c),to(#6f5499));
+        background-image: -webkit-linear-gradient(top,#563d7c 0,#6f5499 100%);
+        background-image: -o-linear-gradient(top,#563d7c 0,#6f5499 100%);
+        background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%);
+        margin-top: -30px;
+        padding: 80px 0px;
+    }
+    .jumbotron h1, .jumbotron p{
+        color: #fff;
+    }
+    .c-movie-list .c-movie-list-each{
+        padding: 10px 0px;
+        border-bottom:1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    .c-movie-list-each h3 span{
+        color: #999;
+        font-weight: bold;
+    }
+    .c-movie-list-each h3 a{
+        color: #563d7c;
+        transition:all 0.3s;
+        font-weight: bold;
+    }
+    .c-movie-list-each h3 a:hover{
+        color: #000;
+        text-decoration: none;
+    }
+    .c-movie-list-each h5{
+        
+    }
+    .c-movie-list-each h5 span{
+        color: #563d7c;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .pagination p{
+        font-size: 20px;
+        float: right;
+        text-align: right;
+    }
+    </style>
+  </head>
+  <body>
+  <div class="c-wrap">
+      <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Movie Scraper</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Top 250 Movies</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/admin">Admin Login</a></li>
+                  </ul>
+                </li>
+                <li><a href="https://www.facebook.com/Robinson.CheraPhotography/">©Robinson Chera</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="jumbotron">
+            <div class="container">
+              <h1>Django Movie app</h1>
+              <p>It was created using Python, Django, and Beautiful Soup(a Python library for pulling data out of HTML and XML files)</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6 c-movie-list">
+                    {% for video in videos %}
+                        <div class="c-movie-list-each">
+                            <h3><span>#{{ video.video_rank }}</span> <a href="{{ video.movie_url }}" title="{{ video.hover_text }}">{{ video.title }}</a></h3>
+                            <h5><span>{{ video.rating }}</span> on {{ video.no_of_votes }} votes</h5>
+                        </div>
+                    {% endfor %}
+
+                    {% if videos %}
+                    <div class="pagination">
+                        <p class="text-center">
+                        <p class="step-links">
+                            {% if videos.has_previous %}
+                                <a href="?page={{ videos.previous_page_number }}"><<</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ videos.number }} of {{ videos.paginator.num_pages }}
+                            </span>
+
+                            {% if videos.has_next %}
+                                <a href="?page={{ videos.next_page_number }}">>></a>
+                            {% endif %}
+                        </p>
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+  </div>
+        
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
